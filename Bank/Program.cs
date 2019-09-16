@@ -39,9 +39,9 @@ namespace Bank
 
                         break;
                     case 3:
-                        foreach (var array in customerList)
+                        foreach (Customer c in customerList)
                         {
-                            Console.WriteLine();
+                            Console.WriteLine(c.ShowCustomer);
                         }
                         break;
                     case 4:
