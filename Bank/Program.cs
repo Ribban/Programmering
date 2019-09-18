@@ -32,23 +32,57 @@ namespace Bank
                         customer.name = Console.ReadLine();
                         Console.Write("Ange ditt nuvarande saldo: ");
                         customer.balance = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Välkommen till vår bank " + customer.name);
                         customerList.Add(customer);
+                        Console.WriteLine("Välkommen till vår bank " + customer.name);
                         break;
                     case 2:
-
-                        break;
-                    case 3:
                         foreach (Customer c in customerList)
                         {
                             Console.WriteLine(c.ShowCustomer);
                         }
+                        Console.Write("Vem vill du ta bort?");
+                        int choise = int.Parse(Console.ReadLine());
+                        customerList.Remove(customerList[choise - 1]);
+                        Console.WriteLine("Tog bort användare.");
+                        break;
+                    case 3:
+                        foreach (Customer c in customerList)
+                        {
+                            Console.WriteLine(c.name);
+                        }
                         break;
                     case 4:
+                        foreach (Customer c in customerList)
+                        {
+                            Console.WriteLine(c.name);
+                        }
+                        Console.Write("Vems saldo vill du visa? ");
+                        int customerBalance = int.Parse(Console.ReadLine());
+                        Console.WriteLine(customerList[customerBalance - 1]);
                         break;
                     case 5:
+                        Console.Write("Hos vem vill du göra en insättning?");
+                        foreach (Customer c in customerList)
+                        {
+                            Console.WriteLine(c.name);
+                        }
+                        customerBalance = int.Parse(Console.ReadLine());
+                        Console.Write("Hur stor insättning vill du göra?");
+                        var addBalance = int.Parse(Console.ReadLine());
+                        customerList[customerBalance - 1].transaction.Add(addBalance);
+                        customerList[customerBalance - 1].balance += addBalance;
                         break;
                     case 6:
+                        Console.Write("Hos vem vill du göra ett uttag?");
+                        foreach (Customer c in customerList)
+                        {
+                            Console.WriteLine(c.name);
+                        }
+                        customerBalance = int.Parse(Console.ReadLine());
+                        Console.Write("Hur mycket vill du ta ut?");
+                        var subBalance = int.Parse(Console.ReadLine());
+                        customerList[customerBalance - 1].transaction.Add(subBalance * -1);
+                        customerList[customerBalance - 1].balance += subBalance * -1;
                         break;
                     case 7:
                         notDone = false;
