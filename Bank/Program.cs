@@ -9,8 +9,8 @@ namespace Bank
 
         static void Main(string[] args)
         {
-            bool notDone = true;
-            while (notDone == true) {
+            bool notDone = true; //Ger ett ja/nej värde
+            while (notDone == true) { //Gör en loop tills notDone är false
                 Console.WriteLine("Välkommen till banken!");
                 Console.WriteLine("Ange vilket av följande alternativ du önskar göra.");
                 Console.WriteLine("1 : Lägg till en användare");
@@ -22,17 +22,17 @@ namespace Bank
                 Console.WriteLine("7 : Avsluta programmet");
                 Console.WriteLine(" ");
                 Console.Write("Skriv ditt val:");
-                int choice = int.Parse(Console.ReadLine());
+                int choice = int.Parse(Console.ReadLine()); //Läser användarens input
 
-                switch (choice)
+                switch (choice) //Väljer vilken kod som körs beroende på användarens input
                 {
                     case 1:
                         Customer customer = new Customer();
                         Console.Write("Ange ditt namn: ");
-                        customer.name = Console.ReadLine();
+                        customer.name = Console.ReadLine(); //Ger customer en string
                         Console.Write("Ange ditt nuvarande saldo: ");
-                        customer.balance = int.Parse(Console.ReadLine());
-                        customerList.Add(customer);
+                        customer.balance = int.Parse(Console.ReadLine()); //Ger customer en int
+                        customerList.Add(customer); //Lägger till en ny customer i customerList
                         Console.WriteLine("Välkommen till vår bank " + customer.name);
                         break;
                     case 2:
@@ -41,12 +41,12 @@ namespace Bank
                             Console.WriteLine(c.ShowCustomer);
                         }
                         Console.Write("Vem vill du ta bort?");
-                        int choise = int.Parse(Console.ReadLine());
-                        customerList.Remove(customerList[choise - 1]);
+                        int choise = int.Parse(Console.ReadLine()); //Ger choise ett värde
+                        customerList.Remove(customerList[choise - 1]); //Kollar customerList och tar bort customer beroende på användarens input
                         Console.WriteLine("Tog bort användare.");
                         break;
                     case 3:
-                        foreach (Customer c in customerList)
+                        foreach (Customer c in customerList) ///Visar alla customers i customerList
                         {
                             Console.WriteLine(c.name);
                         }
@@ -57,8 +57,8 @@ namespace Bank
                             Console.WriteLine(c.name);
                         }
                         Console.Write("Vems saldo vill du visa? ");
-                        int customerBalance = int.Parse(Console.ReadLine());
-                        Console.WriteLine(customerList[customerBalance - 1]);
+                        int customerBalance = int.Parse(Console.ReadLine()); //Ger customerBalance ett värde
+                        Console.WriteLine(customerList[customerBalance - 1].balance); //Kollar customerList och printar en customers balance beroende på användarens input
                         break;
                     case 5:
                         Console.Write("Hos vem vill du göra en insättning?");
@@ -68,9 +68,8 @@ namespace Bank
                         }
                         customerBalance = int.Parse(Console.ReadLine());
                         Console.Write("Hur stor insättning vill du göra?");
-                        var addBalance = int.Parse(Console.ReadLine());
-                        customerList[customerBalance - 1].transaction.Add(addBalance);
-                        customerList[customerBalance - 1].balance += addBalance;
+                        var addBalance = int.Parse(Console.ReadLine()); //Nedan togs av Jonathan Eriksson och gjordes om för att passa min kod
+                        customerList[customerBalance - 1].balance += addBalance; //Ändrar värdet i balance
                         break;
                     case 6:
                         Console.Write("Hos vem vill du göra ett uttag?");
@@ -80,12 +79,11 @@ namespace Bank
                         }
                         customerBalance = int.Parse(Console.ReadLine());
                         Console.Write("Hur mycket vill du ta ut?");
-                        var subBalance = int.Parse(Console.ReadLine());
-                        customerList[customerBalance - 1].transaction.Add(subBalance * -1);
-                        customerList[customerBalance - 1].balance += subBalance * -1;
+                        var subBalance = int.Parse(Console.ReadLine()); //Ger subBalance ett värde
+                        customerList[customerBalance - 1].balance += subBalance * -1; //Samma som ovan men adderar ett negativt tal
                         break;
                     case 7:
-                        notDone = false;
+                        notDone = false; //Ger notDone värdet false så loopen blir klar
                         break;
                 }
             

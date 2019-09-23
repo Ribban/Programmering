@@ -12,8 +12,6 @@ namespace Bank
 
         public int balance { get; set; }
 
-        public List<int> transaction = new List<int>();
-
         public string ShowCustomer { get { return name + " " + balance; } }
     }
 }
