@@ -10,6 +10,10 @@ namespace Bank
 
         static void Main(string[] args)
         {
+            string filepath = @"C:\Users\eliagrun\Desktop\Programering\Git\Bank\";
+            string filename = @"bank.txt";
+            ReadFile(filepath, filename);
+
             bool notDone = true; //Ger ett ja/nej värde
             while (notDone == true) { //Gör en loop tills notDone är false
                 Console.WriteLine("Välkommen till banken!");
