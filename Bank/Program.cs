@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace Bank
 {
@@ -12,8 +16,24 @@ namespace Bank
         {
             string filepath = @"C:\Users\eliagrun\Desktop\Programering\Git\Bank\";
             string filename = @"bank.txt";
-            ReadFile(filepath, filename);
-
+            string readFile = filepath + filename;
+            try
+            {
+                if (File.Exists(readFile))
+                {
+                    string jsonText = File.ReadAllText(readFile);
+                    if(jsonText != "")
+                    {
+                        customerList = JsonConvert.DeserializeObject<List<Customer>>(jsonText);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Ett fel uppstod!");
+                Console.WriteLine(exc.Message);
+            } 
             bool notDone = true; //Ger ett ja/nej värde
             while (notDone == true) { //Gör en loop tills notDone är false
                 Console.WriteLine("Välkommen till banken!");
@@ -88,10 +108,22 @@ namespace Bank
                         customerList[customerBalance - 1].balance += subBalance * -1; //Samma som ovan men adderar ett negativt tal
                         break;
                     case 7:
+                        if (Directory.Exists(readFile) == false)
+                        {
+                            Directory.CreateDirectory(filename);
+                        }
+                        if (File.Exists(readFile) == false) //If file does not exist
+                        {
+                            var createdFile = File.Create(readFile); //Create file in selected directory
+                            createdFile.Close();
+                            string json = JsonConvert.SerializeObject(customerList); //Convert list to json format
+                            File.WriteAllText(readFile, json); //Store list into into .txt file
+                        }
                         notDone = false; //Ger notDone värdet false så loopen blir klar
                         break;
                 }
-            
+                
+
             }
         }
     }
