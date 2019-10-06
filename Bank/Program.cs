@@ -10,30 +10,13 @@ namespace Bank
 {
     class Program
     {
-        static List<Customer> customerList = new List<Customer>();
+        static List<Customer> customerList = new List<Customer>(); //Gör en ny lista
 
         static void Main(string[] args)
         {
-            string filepath = @"C:\Users\eliagrun\Desktop\Programering\Git\Bank\";
-            string filename = @"bank.txt";
-            string readFile = filepath + filename;
-            try
-            {
-                if (File.Exists(readFile))
-                {
-                    string jsonText = File.ReadAllText(readFile);
-                    if(jsonText != "")
-                    {
-                        customerList = JsonConvert.DeserializeObject<List<Customer>>(jsonText);
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                Console.WriteLine("");
-                Console.WriteLine("Ett fel uppstod!");
-                Console.WriteLine(exc.Message);
-            } 
+            string filepath = @"C:\Users\eliagrun\Desktop\Programering\Git\Bank\"; //Ger en fildestination
+            string filename = @"bank.txt"; //Ger ett filnamn
+            readFile(filepath, filename); //Läser in nuvarande filen
             bool notDone = true; //Ger ett ja/nej värde
             while (notDone == true) { //Gör en loop tills notDone är false
                 Console.WriteLine("Välkommen till banken!");
@@ -61,9 +44,9 @@ namespace Bank
                         Console.WriteLine("Välkommen till vår bank " + customer.name);
                         break;
                     case 2:
-                        foreach (Customer c in customerList)
+                        foreach (Customer item in customerList)
                         {
-                            Console.WriteLine(c.ShowCustomer);
+                            Console.WriteLine(item.name);
                         }
                         Console.Write("Vem vill du ta bort?");
                         int choise = int.Parse(Console.ReadLine()); //Ger choise ett värde
@@ -108,23 +91,46 @@ namespace Bank
                         customerList[customerBalance - 1].balance += subBalance * -1; //Samma som ovan men adderar ett negativt tal
                         break;
                     case 7:
-                        if (Directory.Exists(readFile) == false)
-                        {
-                            Directory.CreateDirectory(filename);
-                        }
-                        if (File.Exists(readFile) == false) //If file does not exist
-                        {
-                            var createdFile = File.Create(readFile); //Create file in selected directory
-                            createdFile.Close();
-                            string json = JsonConvert.SerializeObject(customerList); //Convert list to json format
-                            File.WriteAllText(readFile, json); //Store list into into .txt file
-                        }
                         notDone = false; //Ger notDone värdet false så loopen blir klar
                         break;
                 }
                 
 
             }
+            writeFile(filepath, filename); //Skriver ut nuvarande listan i filen
         }
+        private static void writeFile(string filepath, string filename) //Instruktioner till writeFile
+        {
+            string f = filepath + filename; //Gör en ny sträng
+            if (File.Exists(f)) //Om filen finns
+            {
+                File.Delete(f); //Ta bort filen
+            }
+            if (Directory.Exists(filepath) == false) //Om destinationen inte finns
+            {
+                Directory.CreateDirectory(filepath); //Skapa destinationen
+            }
+            string appendText = ""; //Gör en tom sträng
+            foreach (Customer item in customerList) //Läser in listan
+            {
+                appendText += item.ShowCustomer() + Environment.NewLine; //Skriver in listan på den tomma strängen på olika rader
+            }
+            File.AppendAllText(f, appendText); //Skriver ut filen
+        }
+        private static void readFile(string filepath, string filename) //Instruktioner för readFile
+        {
+            string f = filepath + filename;
+            if (File.Exists(f)) //Kollar om filen finns
+            {
+                string[] rows = File.ReadAllLines(f); //Läser alla rader i filen
+                foreach (string item in rows) //En loop för varje rad
+                {
+                    Customer customer = new Customer();
+                    customer.SaveCustomer(item); //Kör koden som skriver in customer
+                    customerList.Add(customer); //Lägger till raden i listan
+                }
+            }
+        }
+
     }
 }
