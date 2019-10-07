@@ -16,7 +16,25 @@ namespace Bank
         {
             string filepath = @"C:\Users\eliagrun\Desktop\Programering\Git\Bank\"; //Ger en fildestination
             string filename = @"bank.txt"; //Ger ett filnamn
+            string ReadFile = filepath + filename;
             readFile(filepath, filename); //Läser in nuvarande filen
+            try
+            {
+                if (File.Exists(ReadFile))
+                {
+                    string jsonText = File.ReadAllText(ReadFile);
+                    if (jsonText != "")
+                    {
+                        customerList = JsonConvert.DeserializeObject<List<Customer>>(jsonText);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Ett fel uppstod!");
+                Console.WriteLine(exc.Message);
+            }
             bool notDone = true; //Ger ett ja/nej värde
             while (notDone == true) { //Gör en loop tills notDone är false
                 Console.WriteLine("Välkommen till banken!");

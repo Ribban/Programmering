@@ -31,7 +31,7 @@ namespace Bank
 
         public string ShowCustomer()
         {
-            return "Användare: " + name + " --- " + "Saldo: " + balance + "kr";
+            return name + ',' + balance;
         }
     }
 }
