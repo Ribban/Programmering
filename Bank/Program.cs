@@ -10,25 +10,27 @@ namespace Bank
 {
     class Program
     {
-        static List<Customer> customerList = new List<Customer>(); //Gör en ny lista
+        static List<Customer> customerList = new List<Customer>(); // Skapar en lista att spara alla customer objekt med hjälp av konstruktorn <list>
 
         static void Main(string[] args)
         {
-            string filepath = @"C:\Users\eliagrun\Desktop\Programering\Git\Bank\"; //Ger en fildestination
-            string filename = @"bank.txt"; //Ger ett filnamn
-            string ReadFile = filepath + filename;
-            readFile(filepath, filename); //Läser in nuvarande filen
+            string filepath = @"E:\Hämtade filer\bank\Programmering\Bank\"; //Ger en fildestination
+            string filename = @"Konton.txt"; //Ger ett filnamn
+            string readfile = filepath + filename;
+            ReadFile(filepath, filename); //Läser in nuvarande filen
+            /// Kollar om filen som ska läsas in är korrekt
             try
             {
-                if (File.Exists(ReadFile))
+                if (File.Exists(readfile))
                 {
-                    string jsonText = File.ReadAllText(ReadFile);
+                    string jsonText = File.ReadAllText(readfile);
                     if (jsonText != "")
                     {
                         customerList = JsonConvert.DeserializeObject<List<Customer>>(jsonText);
                     }
                 }
             }
+            ///Ger ett felmeddelande ifall något går fel
             catch (Exception exc)
             {
                 Console.WriteLine("");
@@ -50,64 +52,118 @@ namespace Bank
                 Console.Write("Skriv ditt val:");
                 int choice = int.Parse(Console.ReadLine()); //Läser användarens input
 
-                switch (choice) //Väljer vilken kod som körs beroende på användarens input
+                /// Väljer vilken kod som körs beroende på användarens input
+                switch (choice)
                 {
+                    /// Lägger till en ny kund i customerList
                     case 1:
-                        Customer customer = new Customer();
-                        Console.Write("Ange ditt namn: ");
-                        customer.name = Console.ReadLine(); //Ger customer en string
-                        Console.Write("Ange ditt nuvarande saldo: ");
-                        customer.balance = int.Parse(Console.ReadLine()); //Ger customer en int
-                        customerList.Add(customer); //Lägger till en ny customer i customerList
-                        Console.WriteLine("Välkommen till vår bank " + customer.name);
-                        break;
-                    case 2:
-                        foreach (Customer item in customerList)
+                        try
                         {
-                            Console.WriteLine(item.name);
+                            Customer customer = new Customer(); //Skapar en ny instans av klassen Customer med hjälp av konstruktorn "new Customer()"
+                            Console.Write("Ange ditt namn: ");
+                            customer.name = Console.ReadLine(); //Ger customer en string
+                            Console.Write("Ange ditt nuvarande saldo: ");
+                            customer.balance = int.Parse(Console.ReadLine()); //Ger customer en int
+                            customerList.Add(customer); //Lägger till en ny customer i customerList
+                            Console.WriteLine("Välkommen till vår bank " + customer.name);
                         }
-                        Console.Write("Vem vill du ta bort?");
-                        int choise = int.Parse(Console.ReadLine()); //Ger choise ett värde
-                        customerList.Remove(customerList[choise - 1]); //Kollar customerList och tar bort customer beroende på användarens input
-                        Console.WriteLine("Tog bort användare.");
+                        catch (Exception exc)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("Någonting gick fel med att lägga till en användare");
+                            Console.WriteLine(exc.Message);
+                        }
                         break;
+                    /// Tar bort en kund ur customerList
+                    case 2:
+                        try
+                        {
+                            foreach (Customer item in customerList)
+                            {
+                                Console.WriteLine(item.name);
+                            }
+                            Console.Write("Vem vill du ta bort?");
+                            int choise = int.Parse(Console.ReadLine()); //Ger choise ett värde
+                            customerList.Remove(customerList[choise - 1]); //Kollar customerList och tar bort customer beroende på användarens input
+                            Console.WriteLine("Tog bort användare.");
+                        }
+                        catch (Exception exc)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("Någonting gick fel med att ta bort en användare");
+                            Console.WriteLine(exc.Message);
+                        }
+                        break;
+                    /// Visar allting i customerList
                     case 3:
                         foreach (Customer c in customerList) ///Visar alla customers i customerList
                         {
                             Console.WriteLine(c.name);
                         }
                         break;
+                    /// Visar saldo för en enskild kund
                     case 4:
-                        foreach (Customer c in customerList)
+                        try
                         {
-                            Console.WriteLine(c.name);
+                            foreach (Customer c in customerList)
+                            {
+                                Console.WriteLine(c.name);
+                            }
+                            Console.Write("Vems saldo vill du visa? ");
+                            int customerBalance = int.Parse(Console.ReadLine()); //Ger customerBalance ett värde
+                            Console.WriteLine(customerList[customerBalance - 1].balance); //Kollar customerList och printar en customers balance beroende på användarens input
                         }
-                        Console.Write("Vems saldo vill du visa? ");
-                        int customerBalance = int.Parse(Console.ReadLine()); //Ger customerBalance ett värde
-                        Console.WriteLine(customerList[customerBalance - 1].balance); //Kollar customerList och printar en customers balance beroende på användarens input
+                        catch (Exception exc)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("Någonting gick fel med att ta bort en användare");
+                            Console.WriteLine(exc.Message);
+                        }
                         break;
+                    /// Lägger till pengar på en kunds konto
                     case 5:
-                        Console.Write("Hos vem vill du göra en insättning?");
-                        foreach (Customer c in customerList)
+                        try
                         {
-                            Console.WriteLine(c.name);
+                            Console.Write("Hos vem vill du göra en insättning?");
+                            foreach (Customer c in customerList)
+                            {
+                                Console.WriteLine(c.name);
+                            }
+                            int customerBalance = int.Parse(Console.ReadLine());
+                            Console.Write("Hur stor insättning vill du göra?");
+                            var addBalance = int.Parse(Console.ReadLine()); //Nedan togs av Jonathan Eriksson och gjordes om för att passa min kod
+                            customerList[customerBalance - 1].balance += addBalance; //Ändrar värdet i balance
                         }
-                        customerBalance = int.Parse(Console.ReadLine());
-                        Console.Write("Hur stor insättning vill du göra?");
-                        var addBalance = int.Parse(Console.ReadLine()); //Nedan togs av Jonathan Eriksson och gjordes om för att passa min kod
-                        customerList[customerBalance - 1].balance += addBalance; //Ändrar värdet i balance
+                        catch (Exception exc)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("Någonting gick fel med att ta bort en användare");
+                            Console.WriteLine(exc.Message);
+                        }
                         break;
+                    /// Tar bort pengar från en kunds konto
                     case 6:
-                        Console.Write("Hos vem vill du göra ett uttag?");
-                        foreach (Customer c in customerList)
+                        try
                         {
-                            Console.WriteLine(c.name);
+                            Console.Write("Hos vem vill du göra ett uttag?");
+                            foreach (Customer c in customerList)
+                            {
+                                Console.WriteLine(c.name);
+                            }
+                            int customerBalance = int.Parse(Console.ReadLine());
+                            Console.Write("Hur mycket vill du ta ut?");
+                            var subBalance = int.Parse(Console.ReadLine()); //Ger subBalance ett värde
+                            customerList[customerBalance - 1].balance += subBalance * -1; //Samma som ovan men adderar ett negativt tal
                         }
-                        customerBalance = int.Parse(Console.ReadLine());
-                        Console.Write("Hur mycket vill du ta ut?");
-                        var subBalance = int.Parse(Console.ReadLine()); //Ger subBalance ett värde
-                        customerList[customerBalance - 1].balance += subBalance * -1; //Samma som ovan men adderar ett negativt tal
+                        
+                        catch (Exception exc)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("Någonting gick fel med att ta bort en användare");
+                            Console.WriteLine(exc.Message);
+                        }
                         break;
+                    /// Avslutar programmet
                     case 7:
                         notDone = false; //Ger notDone värdet false så loopen blir klar
                         break;
@@ -115,9 +171,10 @@ namespace Bank
                 
 
             }
-            writeFile(filepath, filename); //Skriver ut nuvarande listan i filen
+            WriteFile(filepath, filename); //Skriver ut nuvarande listan i filen
         }
-        private static void writeFile(string filepath, string filename) //Instruktioner till writeFile
+        /// Skriver ut customerList på fil
+        private static void WriteFile(string filepath, string filename)
         {
             string f = filepath + filename; //Gör en ny sträng
             if (File.Exists(f)) //Om filen finns
@@ -135,7 +192,8 @@ namespace Bank
             }
             File.AppendAllText(f, appendText); //Skriver ut filen
         }
-        private static void readFile(string filepath, string filename) //Instruktioner för readFile
+        /// Läser in filen och skriver innehållet på customerList
+        private static void ReadFile(string filepath, string filename) //Instruktioner för readFile
         {
             string f = filepath + filename;
             if (File.Exists(f)) //Kollar om filen finns
