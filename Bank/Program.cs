@@ -14,7 +14,7 @@ namespace Bank
 
         static void Main(string[] args)
         {
-            string filepath = @"E:\Hämtade filer\bank\Programmering\Bank\"; //Ger en fildestination
+            string filepath = @"C:\Users\eliagrun\Desktop\Programering\Git\Bank\"; //Ger en fildestination
             string filename = @"Konton.txt"; //Ger ett filnamn
             string readfile = filepath + filename;
             ReadFile(filepath, filename); //Läser in nuvarande filen
