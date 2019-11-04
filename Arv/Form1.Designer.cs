@@ -28,15 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.cbNames = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lbSpecies = new System.Windows.Forms.Label();
             this.lbCanFly = new System.Windows.Forms.Label();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // cbNames
             // 
+            this.cbNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNames.FormattingEnabled = true;
             this.cbNames.Location = new System.Drawing.Point(88, 12);
             this.cbNames.Name = "cbNames";
@@ -73,24 +79,45 @@
             // lbCanFly
             // 
             this.lbCanFly.AutoSize = true;
-            this.lbCanFly.Location = new System.Drawing.Point(24, 132);
+            this.lbCanFly.Location = new System.Drawing.Point(24, 389);
             this.lbCanFly.Name = "lbCanFly";
             this.lbCanFly.Size = new System.Drawing.Size(94, 17);
             this.lbCanFly.TabIndex = 4;
             this.lbCanFly.Text = "Kan inte flyga";
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "cat.jpg");
+            this.imageList1.Images.SetKeyName(1, "dog.jpg");
+            this.imageList1.Images.SetKeyName(2, "bird.jpg");
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(56, 76);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(261, 310);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbCanFly);
             this.Controls.Add(this.lbSpecies);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbNames);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Djur";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,6 +130,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbSpecies;
         private System.Windows.Forms.Label lbCanFly;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

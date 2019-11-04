@@ -34,12 +34,19 @@ namespace Arv
             {
                 Animal animal = animals[selectedIndex];
                 lbSpecies.Text = animal.Species.ToString();
+                pictureBox1.Image = imageList1.Images[(int)animal.Species];
                 lbCanFly.Text = (animal.CanFly ? "Kan flyga" : "Kan inte flyga");
             } else
             {
                 lbSpecies.Text = "";
                 lbCanFly.Text = "";
+                pictureBox1.Image = null;
             }
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
     }

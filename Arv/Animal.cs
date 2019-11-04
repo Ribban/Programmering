@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arv
 {
+    enum SPECIES { CAT , DOG , BIRD}
     class Animal
     {
         public string Name;
