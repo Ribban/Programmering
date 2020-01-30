@@ -8,9 +8,21 @@ namespace Uppgift_1___Simmare
 {
     class Swimmer
     {
-        private string name;
-        private BathingSuit suit;
-        public string swim;
+        private string Name;
+        private BathingSuit Suit;
+        public Swimmer(string Name, BathingSuit Suit)
+        {
+            this.Name = Name;
+            this.Suit = Suit;
+        }
+        public string Swim()
+        {
+            return "Splish splash - it's so fun in the bath!";
+        }
+        public void Setsuit(BathingSuit Suit)
+        {
+            this.Suit = Suit;
+        }
     }
     class BathingSuit
     {
@@ -18,10 +30,17 @@ namespace Uppgift_1___Simmare
     }
     class ProfessionalSwimmer
     {
+        public void SetSuit(BathingSuit Suit)
+        {
 
+        }
     }
     class YoungSwimmer
     {
-        private bool tired;
+        private bool Tired;
+        public string Swim()
+        {
+            return "I'm so tired - time to get out";
+        }
     }
 }
