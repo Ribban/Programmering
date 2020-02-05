@@ -8,39 +8,64 @@ namespace Uppgift_1___Simmare
 {
     class Swimmer
     {
-        private string Name;
-        private BathingSuit Suit;
-        public Swimmer(string Name, BathingSuit Suit)
+        private string name { get; set; }
+        private BathingSuit suit { get; set; }
+        public Swimmer(string name, BathingSuit suit)
         {
-            this.Name = Name;
-            this.Suit = Suit;
+            this.name = name;
+            this.suit = suit;
         }
-        public string Swim()
+        public void SetName(string name)
+        {
+            this.name = name;
+        }
+        public void SetSuit(BathingSuit suit)
+        {
+            if(suit != null)
+            {
+                this.suit = suit;
+            }
+        }
+        public virtual string Swim()
         {
             return "Splish splash - it's so fun in the bath!";
         }
-        public void Setsuit(BathingSuit Suit)
+        public void Setsuit(BathingSuit suit)
         {
-            this.Suit = Suit;
+            this.suit = suit;
         }
     }
     class BathingSuit
     {
 
     }
-    class ProfessionalSwimmer
+    class ProfessionalSwimmer : Swimmer
     {
-        public void SetSuit(BathingSuit Suit)
+        public ProfessionalSwimmer(string name, BathingSuit suit) : base(name, suit)
         {
-
+            SetName(name);
+            SetSuit(suit);
         }
     }
-    class YoungSwimmer
+    class YoungSwimmer : Swimmer
     {
-        private bool Tired;
-        public string Swim()
+        public YoungSwimmer(string name, BathingSuit suit) : base(name, suit)
         {
-            return "I'm so tired - time to get out";
+            SetName(name);
+            SetSuit(suit);
         }
+        public void SetTired()
+        {
+            tired = true;
+        }
+        public override string Swim()
+        {
+            if(!tired)
+            {
+                SetTired();
+                return "Splish splash - it's so fun in the bath!";
+            }
+        }
+        private bool tired;
     }
 }
