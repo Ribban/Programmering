@@ -27,6 +27,15 @@ namespace PolymorfismIsAsForm
             {
                 obj = new B();
             }
+            if (obj is B)
+            {
+                B bObj = (obj as B);
+                textBox1.Text = bObj.Description();
+            }
+            else
+            {
+                textBox1.Text = obj.Description();
+            }
         }
     }
 }

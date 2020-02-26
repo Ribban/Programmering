@@ -10,6 +10,10 @@ namespace Uppgift_1___Simmare
     {
         private string name { get; set; }
         private BathingSuit suit { get; set; }
+        public Swimmer(string name)
+        {
+            this.name = name;
+        }
         public Swimmer(string name, BathingSuit suit)
         {
             this.name = name;
@@ -41,6 +45,10 @@ namespace Uppgift_1___Simmare
     }
     class ProfessionalSwimmer : Swimmer
     {
+        public ProfessionalSwimmer(string name) : base(name)
+        {
+            SetName(name);
+        }
         public ProfessionalSwimmer(string name, BathingSuit suit) : base(name, suit)
         {
             SetName(name);
@@ -49,6 +57,10 @@ namespace Uppgift_1___Simmare
     }
     class YoungSwimmer : Swimmer
     {
+        public YoungSwimmer(string name) : base(name)
+        {
+            SetName(name);
+        }
         public YoungSwimmer(string name, BathingSuit suit) : base(name, suit)
         {
             SetName(name);
@@ -65,6 +77,7 @@ namespace Uppgift_1___Simmare
                 SetTired();
                 return "Splish splash - it's so fun in the bath!";
             }
+            return "I'm tired!";
         }
         private bool tired;
     }

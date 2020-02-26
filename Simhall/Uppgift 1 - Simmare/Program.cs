@@ -26,12 +26,13 @@ namespace Uppgift_1___Simmare
             swimmers.Add(new YoungSwimmer("Christoffer", new BathingSuit()));
             foreach (Swimmer sw in swimmers)
             {
-                sw.Swim();
+                Console.WriteLine(sw.Swim());
             }
             foreach (Swimmer sw in swimmers)
             {
-                sw.Swim();
+                Console.WriteLine(sw.Swim());
             }
+            Console.ReadKey();
         }
     }
 }
