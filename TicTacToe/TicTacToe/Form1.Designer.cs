@@ -38,7 +38,7 @@
             this.clientPort = new System.Windows.Forms.RichTextBox();
             this.serverConnect = new System.Windows.Forms.Button();
             this.clientConnect = new System.Windows.Forms.Button();
-            this.playerMove = new System.Windows.Forms.RichTextBox();
+            this.infoBox = new System.Windows.Forms.RichTextBox();
             this.gameStatus = new System.Windows.Forms.RichTextBox();
             this.makeMove = new System.Windows.Forms.Button();
             this.a1 = new System.Windows.Forms.PictureBox();
@@ -133,6 +133,7 @@
             this.serverConnect.TabIndex = 8;
             this.serverConnect.Text = "Connect";
             this.serverConnect.UseVisualStyleBackColor = true;
+            this.serverConnect.Click += new System.EventHandler(this.serverConnect_Click);
             // 
             // clientConnect
             // 
@@ -142,14 +143,15 @@
             this.clientConnect.TabIndex = 9;
             this.clientConnect.Text = "Connect";
             this.clientConnect.UseVisualStyleBackColor = true;
+            this.clientConnect.Click += new System.EventHandler(this.clientConnect_Click);
             // 
-            // playerMove
+            // infoBox
             // 
-            this.playerMove.Location = new System.Drawing.Point(121, 133);
-            this.playerMove.Name = "playerMove";
-            this.playerMove.Size = new System.Drawing.Size(276, 39);
-            this.playerMove.TabIndex = 19;
-            this.playerMove.Text = "";
+            this.infoBox.Location = new System.Drawing.Point(121, 133);
+            this.infoBox.Name = "infoBox";
+            this.infoBox.Size = new System.Drawing.Size(276, 39);
+            this.infoBox.TabIndex = 19;
+            this.infoBox.Text = "";
             // 
             // gameStatus
             // 
@@ -256,7 +258,7 @@
             this.Controls.Add(this.a1);
             this.Controls.Add(this.makeMove);
             this.Controls.Add(this.gameStatus);
-            this.Controls.Add(this.playerMove);
+            this.Controls.Add(this.infoBox);
             this.Controls.Add(this.clientConnect);
             this.Controls.Add(this.serverConnect);
             this.Controls.Add(this.clientPort);
@@ -295,7 +297,7 @@
         private System.Windows.Forms.RichTextBox clientPort;
         private System.Windows.Forms.Button serverConnect;
         private System.Windows.Forms.Button clientConnect;
-        private System.Windows.Forms.RichTextBox playerMove;
+        private System.Windows.Forms.RichTextBox infoBox;
         private System.Windows.Forms.RichTextBox gameStatus;
         private System.Windows.Forms.Button makeMove;
         private System.Windows.Forms.PictureBox a1;
