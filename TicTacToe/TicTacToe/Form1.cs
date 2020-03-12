@@ -59,11 +59,46 @@ namespace TicTacToe
             {
                 client = new TcpClient();
                 IPEndPoint ipEND = new IPEndPoint(IPAddress.Parse(clientBox.Text), int.Parse(clientBox.Text));
+                client.Connect(ipEND);
+                if (client.Connected)
+                {
+                    this.Update();
+                    infoBox.AppendText("Connected to server" + "\n");
+                    infoBox.Update();
+                    STR = new StreamReader(client.GetStream());
+                    STW = new StreamWriter(client.GetStream());
+                    STW.AutoFlush = true;
+                }
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message.ToString());
             }
+        }
+        enum PlayerTurn { None, Player1, Player2 };
+        enum Winner { None, Player1, Player2, Draw };
+
+        PlayerTurn turn;
+        Winner winner;
+
+        void OnNewGame()
+        {
+            PictureBox[] allPictures = { a1, a2, a3, b1, b2, b3, c1, c2, c3 };
+            foreach (var p in allPictures)
+            {
+                p.Image = null;
+            }
+            turn = PlayerTurn.Player1;
+            winner = Winner.None;
+            ShowTurn();
+        }
+        Winner GetWinner()
+        {
+
+        }
+        void ShowTurn()
+        {
+
         }
     }
 }
