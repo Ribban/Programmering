@@ -11,7 +11,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 
-namespace TicTacToe
+namespace Tic_Tac_Toe
 {
     public partial class Form1 : Form
     {
@@ -75,8 +75,8 @@ namespace TicTacToe
                 MessageBox.Show(ex.Message.ToString());
             }
         }
-        enum PlayerTurn { None, Player1, Player2 };
-        enum Winner { None, Player1, Player2, Draw };
+        enum PlayerTurn { None, Player1, Player2};
+        enum Winner { None, Player1, Player2, Draw};
 
         PlayerTurn turn;
         Winner winner;
@@ -88,6 +88,7 @@ namespace TicTacToe
             {
                 p.Image = null;
             }
+
             turn = PlayerTurn.Player1;
             winner = Winner.None;
             ShowTurn();
@@ -104,19 +105,104 @@ namespace TicTacToe
                                              a1, b2, c3,
                                              a3, b2, c1
                                           };
-            for (int i = 0; i < winningMoves.Length; i += 3)
+            for (int i=0; i < winningMoves.Length; i+=3)
             {
+                if (winningMoves[i].Image != null)
+                {
+                    if (winningMoves[i].Image == winningMoves[i+1].Image &&
+                        winningMoves[i].Image == winningMoves[i + 2].Image)
+                    {
+                        if (winningMoves[i].Image == player1.Image)
+                        {
+                            return Winner.Player1;
+                        }
+                        else
+                        {
+                            return Winner.Player2;
+                        }
 
+                    }
+                }
             }
-
+            PictureBox[] allPictures = { a1, a2, a3, b1, b2, b3, c1, c2, c3 };
+            foreach (var p in allPictures)
+            {
+                if (p.Image == null)
+                {
+                    return Winner.None;
+                };
+            }
+            return Winner.Draw;
         }
+
         void ShowTurn()
         {
+            string status = "";
+            string msg = "";
 
+            switch (winner)
+            {
+                case Winner.None:
+                    if (turn == PlayerTurn.Player1)
+                        status = "Turn: Player 1";
+                    else
+                        status = "Turn: Player 2";
+                    break;
+                case Winner.Player1:
+                   msg = status = "Player 1 Wins!";
+                   
+                    break;
+                case Winner.Player2:
+                  msg = status = "Player 2 Wins";
+                    break;
+                case Winner.Draw:
+                    status = "It's a draw";
+                    break;
+            }
+
+            gameStatus.Text = status;
+            if (msg != "")
+            {
+                MessageBox.Show(msg, "Winner!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
+
         private void OnClick(object sender, EventArgs e)
         {
+            PictureBox p = sender as PictureBox;
 
+            if (p.Image != null)
+                return;
+            if (turn == PlayerTurn.None)
+                return;
+            if (turn == PlayerTurn.Player1)
+            {
+                p.Image = player1.Image;
+            }
+            else
+            {
+                p.Image = player2.Image;
+            }
+            winner = GetWinner();
+            if (winner == Winner.None)
+            {
+                turn = (PlayerTurn.Player1 == turn) ? PlayerTurn.Player2 : PlayerTurn.Player1;
+            }
+            else
+            {
+                turn = PlayerTurn.None;
+            }
+            ShowTurn();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            OnNewGame();
+        }
+
+        private void newGame_Click(object sender, EventArgs e)
+        {
+            OnNewGame();
         }
     }
 }
