@@ -15,6 +15,9 @@ namespace Tic_Tac_Toe
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Unused code, allt nätverksrelaterat är ej funktionellt
+        /// </summary>
         private TcpClient client;
         public StreamReader STR;
         public StreamWriter STW;
@@ -75,12 +78,19 @@ namespace Tic_Tac_Toe
                 MessageBox.Show(ex.Message.ToString());
             }
         }
+
+        /// <summary>
+        /// Ger PlayerTurn och Winner olika värden
+        /// </summary>
         enum PlayerTurn { None, Player1, Player2};
         enum Winner { None, Player1, Player2, Draw};
 
         PlayerTurn turn;
         Winner winner;
 
+        /// <summary>
+        /// Ändrar alla värden till default
+        /// </summary>
         void OnNewGame()
         {
             PictureBox[] allPictures = { a1, a2, a3, b1, b2, b3, c1, c2, c3 };
@@ -93,8 +103,13 @@ namespace Tic_Tac_Toe
             winner = Winner.None;
             ShowTurn();
         }
+        
+        /// <summary>
+        /// Bestämmer en vinnare
+        /// </summary>
         Winner GetWinner()
         {
+            //Skapar alla möjliga kombinationer för att vinna
             PictureBox[] winningMoves = {
                                              a1, a2, a3,
                                              b1, b2, b3,
@@ -105,6 +120,7 @@ namespace Tic_Tac_Toe
                                              a1, b2, c3,
                                              a3, b2, c1
                                           };
+            //Kollar om någon vinnar-kombination har uppnåts och returnerar då en vinnare
             for (int i=0; i < winningMoves.Length; i+=3)
             {
                 if (winningMoves[i].Image != null)
@@ -135,11 +151,15 @@ namespace Tic_Tac_Toe
             return Winner.Draw;
         }
 
+        /// <summary>
+        /// Bestämmer vems tur det är
+        /// </summary>
         void ShowTurn()
         {
             string status = "";
             string msg = "";
 
+            //Ändrar vems tur det är samt returnerar ett meddelande ifall någon vinner eller det blir en draw
             switch (winner)
             {
                 case Winner.None:
@@ -167,6 +187,11 @@ namespace Tic_Tac_Toe
             }
         }
 
+        /// <summary>
+        /// Ändrar spelbrädets pictureboxes till spelarens image
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnClick(object sender, EventArgs e)
         {
             PictureBox p = sender as PictureBox;
