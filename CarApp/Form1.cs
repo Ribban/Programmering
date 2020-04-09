@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace CarApp
 {
@@ -25,7 +28,7 @@ namespace CarApp
                 MessageBox.Show("Du måste fylla i alla rutor", "Felaktig inmatning");
             } else
             {
-                ListViewItem item = CreateListViewItem(txtRegNr.Text, txtMake.Text, txtModel.Text, txtYear.Text,cbxForSale.Checked);
+                ListViewItem item = CreateListViewItem(txtRegNr.Text, txtMake.Text, txtModel.Text, txtYear.Text, cbxForSale.Checked);
                 lsvCars.Items.Add(item);
                 ClearTextboxes();
                 btnClear.Enabled = true;
@@ -60,9 +63,9 @@ namespace CarApp
         {
             ListViewItem item = new ListViewItem(regNr);
             item.SubItems.Add(make);
-            item.SubItems.Add(forSale ? "Yes" : "No");
             item.SubItems.Add(model);
             item.SubItems.Add(year);
+            item.SubItems.Add(forSale ? "Yes" : "No");
             return item;
         }
         private void ClearTextboxes()
@@ -73,6 +76,44 @@ namespace CarApp
             txtYear.Clear();
             cbxForSale.Checked = false;
             txtRegNr.Focus();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtRegNr.Text))
+            {
+                string regNr = txtRegNr.Text.ToUpper();
+                PrintData(regNr);
+            } else
+            {
+                MessageBox.Show("Ange ett registeringsnummer", "Inmatning saknas", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void PrintData(string regNr)
+        {
+            string token = "DtIAxcVeOZhJzLnC6LYN3BjwasJw2FIA5hdvgP00lNKw1cM53ddy1iWpll54";
+            string call = String.Format($"https://api.biluppgifter.se/api/v1/vehicle/regno/{regNr}?api_token={token}");
+            try
+            {
+                WebRequest request = HttpWebRequest.Create(call);
+
+                WebResponse response = request.GetResponse();
+
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+
+                string carJSON = reader.ReadToEnd();
+
+                JObject jsonCar = JObject.Parse(carJSON);
+
+                txtMake.Text = jsonCar["data"]["basic"]["data"]["make"].ToString();
+                txtModel.Text = jsonCar["data"]["basic"]["data"]["model"].ToString();
+                txtYear.Text = jsonCar["data"]["basic"]["data"]["model_year"].ToString();
+            } 
+            catch (Exception e)
+            {
+                MessageBox.Show($"Bil med reigsteringsnummer {regNr} kunde inte hittas\n\nMeddelande: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
