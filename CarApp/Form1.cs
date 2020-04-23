@@ -28,6 +28,9 @@ namespace CarApp
                 MessageBox.Show("Du måste fylla i alla rutor", "Felaktig inmatning");
             } else
             {
+                Car car = new Car(txtRegNr.Text, txtMake.Text, txtModel.Text, Convert.ToInt32(txtYear.Text), cbxForSale.Checked);
+                int result = dbObject.AddCarRow(car);
+                MessageBox.Show("Du har lagt till " + Convert.ToString(result) + " antal bilar");
                 ListViewItem item = CreateListViewItem(txtRegNr.Text, txtMake.Text, txtModel.Text, txtYear.Text, cbxForSale.Checked);
                 lsvCars.Items.Add(item);
                 ClearTextboxes();
