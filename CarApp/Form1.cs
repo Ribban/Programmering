@@ -15,11 +15,24 @@ namespace CarApp
 {
     public partial class Form1 : Form
     {
+        Database dbObject = new Database();
         public Form1()
         {
             InitializeComponent();
+            InitListview();
             txtRegNr.Focus();
         }
+
+        private void InitListview()
+        {
+            List<Car> listOfCars = dbObject.GetRowsFromCars();
+            foreach (var car in listOfCars)
+            {
+                AddCarToListview(car);
+            }
+        }
+
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -31,24 +44,34 @@ namespace CarApp
                 Car car = new Car(txtRegNr.Text, txtMake.Text, txtModel.Text, Convert.ToInt32(txtYear.Text), cbxForSale.Checked);
                 int result = dbObject.AddCarRow(car);
                 MessageBox.Show("Du har lagt till " + Convert.ToString(result) + " antal bilar");
-                ListViewItem item = CreateListViewItem(txtRegNr.Text, txtMake.Text, txtModel.Text, txtYear.Text, cbxForSale.Checked);
-                lsvCars.Items.Add(item);
+                AddCarToListview(car);
                 ClearTextboxes();
                 btnClear.Enabled = true;
             }
         }
 
+        private void AddCarToListview(Car car)
+        {
+            ListViewItem item = CreateListViewItem(car.GetRegNr(), car.GetMake(), car.GetModel(), Convert.ToString(car.GetYear()), car.GetForSale());
+                lsvCars.Items.Add(item);
+        }
+
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (lsvCars.SelectedItems.Count > 0)
+            int res = dbObject.RemoveCarRowByRegNr(lsvCars.SelectedItems[0].Text);
+            MessageBox.Show("Du har tagit bort " + Convert.ToString(res) + " antal bilar från databasen. ");
+            if (res > 0)
             {
-                var item = lsvCars.SelectedItems[0];
-                lsvCars.Items.Remove(item);
-                MessageBox.Show("bilen med registeringsnummer " + item.Text + " är borttagen", "Borttag av bil");
-            }
-            else
-            {
-                MessageBox.Show("Ingen bil var markerad att tas bort", "Borttag av bil");
+                if (lsvCars.SelectedItems.Count > 0)
+                {
+                    var item = lsvCars.SelectedItems[0];
+                    lsvCars.Items.Remove(item);
+                    MessageBox.Show("bilen med registeringsnummer " + item.Text + " är borttagen", "Borttag av bil");
+                }
+                else
+                {
+                    MessageBox.Show("Ingen bil var markerad att tas bort", "Borttag av bil");
+                }
             }
             btnClear.Enabled = (lsvCars.Items.Count > 0);
         }
