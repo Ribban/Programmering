@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+using System.Net.Sockets;
+using System.IO;
 
 namespace Chatapp_Egen
 {
@@ -37,12 +40,15 @@ namespace Chatapp_Egen
                 TcpListener listener = new TcpListener(IPAddress.Any, int.Parse(serverBox.Text));
                 listener.Start();
                 this.Update();
-                infoBox.AppendText("Server started" + "\n");
-                infoBox.Update();
+                chatBox.AppendText("Server started" + "\n");
+                chatBox.Update();
                 client = listener.AcceptTcpClient();
                 STR = new StreamReader(client.GetStream());
                 STW = new StreamWriter(client.GetStream());
                 STW.AutoFlush = true;
+
+                backgroundWorker1.RunWorkerAsync();
+                backgroundWorker2.WorkerSupportsCancellation = true;
             }
             catch (Exception ex)
             {
@@ -60,17 +66,49 @@ namespace Chatapp_Egen
                 if (client.Connected)
                 {
                     this.Update();
-                    infoBox.AppendText("Connected to server" + "\n");
-                    infoBox.Update();
+                    chatBox.AppendText("Connected to server" + "\n");
+                    chatBox.Update();
                     STR = new StreamReader(client.GetStream());
                     STW = new StreamWriter(client.GetStream());
                     STW.AutoFlush = true;
+                    backgroundWorker1.RunWorkerAsync();
+                    backgroundWorker2.WorkerSupportsCancellation = true;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (client.Connected)
+            {
+                try
+                {
+                    recieve = STR.ReadLine();
+                    this.chatBox.Invoke(new MethodInvoker(delegate ()
+                    {
+                        chatBox.AppendText("You:" + recieve + "\n");
+                    }));
+                    recieve = "";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void sendButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
