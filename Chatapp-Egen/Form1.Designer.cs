@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.serverPort = new System.Windows.Forms.RichTextBox();
             this.serverConnect = new System.Windows.Forms.Button();
@@ -36,23 +35,16 @@
             this.klientPort = new System.Windows.Forms.RichTextBox();
             this.clientBox = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.serverBox = new System.Windows.Forms.RichTextBox();
             this.chatBox = new System.Windows.Forms.RichTextBox();
             this.messageTextBox = new System.Windows.Forms.RichTextBox();
             this.sendButton = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.receive = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.serverBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Server Ip-adress";
             // 
             // label2
             // 
@@ -119,23 +111,6 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Klient Port";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(36, 67);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 17);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Klient Ip-adress";
-            // 
-            // serverBox
-            // 
-            this.serverBox.Location = new System.Drawing.Point(33, 26);
-            this.serverBox.Name = "serverBox";
-            this.serverBox.Size = new System.Drawing.Size(225, 27);
-            this.serverBox.TabIndex = 10;
-            this.serverBox.Text = "";
-            // 
             // chatBox
             // 
             this.chatBox.Location = new System.Drawing.Point(33, 131);
@@ -148,7 +123,7 @@
             // 
             this.messageTextBox.Location = new System.Drawing.Point(33, 262);
             this.messageTextBox.Name = "messageTextBox";
-            this.messageTextBox.Size = new System.Drawing.Size(305, 41);
+            this.messageTextBox.Size = new System.Drawing.Size(225, 41);
             this.messageTextBox.TabIndex = 12;
             this.messageTextBox.Text = "";
             // 
@@ -170,11 +145,48 @@
             // 
             this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
             // 
+            // receive
+            // 
+            this.receive.Location = new System.Drawing.Point(263, 262);
+            this.receive.Name = "receive";
+            this.receive.Size = new System.Drawing.Size(83, 41);
+            this.receive.TabIndex = 14;
+            this.receive.Text = "Receive";
+            this.receive.UseVisualStyleBackColor = true;
+            this.receive.Click += new System.EventHandler(this.receive_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(36, 67);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 17);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Klient Ip-adress";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(36, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(113, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Server Ip-adress";
+            // 
+            // serverBox
+            // 
+            this.serverBox.Location = new System.Drawing.Point(33, 26);
+            this.serverBox.Name = "serverBox";
+            this.serverBox.Size = new System.Drawing.Size(225, 27);
+            this.serverBox.TabIndex = 10;
+            this.serverBox.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(528, 360);
+            this.Controls.Add(this.receive);
             this.Controls.Add(this.sendButton);
             this.Controls.Add(this.messageTextBox);
             this.Controls.Add(this.chatBox);
@@ -197,8 +209,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox serverPort;
         private System.Windows.Forms.Button serverConnect;
@@ -206,13 +216,15 @@
         private System.Windows.Forms.RichTextBox klientPort;
         private System.Windows.Forms.RichTextBox clientBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RichTextBox serverBox;
         private System.Windows.Forms.RichTextBox chatBox;
         private System.Windows.Forms.RichTextBox messageTextBox;
         private System.Windows.Forms.Button sendButton;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.Button receive;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox serverBox;
     }
 }
 
