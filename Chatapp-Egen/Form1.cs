@@ -35,15 +35,6 @@ namespace Chatapp_Egen
             
         }
 
-        private void sendButton_Click(object sender, EventArgs e)
-        {
-            byte[] message = Encoding.Unicode.GetBytes(messageTextBox.Text);
-            IPAddress serverIP = IPAddress.Parse("192.168.1.6");
-            IPEndPoint destination = new IPEndPoint(serverIP, 12345);
-            UdpClient klient = new UdpClient();
-            klient.Send(message, message.Length, destination);
-        }
-
         private void receive_Click(object sender, EventArgs e)
         {
             IPEndPoint klientEndPoint = new IPEndPoint(IPAddress.Any, 0);
