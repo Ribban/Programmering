@@ -20,8 +20,8 @@ namespace Chatapp_client
             byte[] message = Encoding.Unicode.GetBytes(messageTextBox.Text);
             IPAddress serverIP = IPAddress.Parse("127.0.0.1");
             IPEndPoint destination = new IPEndPoint(serverIP, 12345);
-            UdpClient klient = new UdpClient();
-            klient.Send(message, message.Length, destination);
+            UdpClient client = new UdpClient();
+            client.Send(message, message.Length, destination);
         }
     }
 }

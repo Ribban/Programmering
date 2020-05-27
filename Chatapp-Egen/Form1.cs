@@ -37,10 +37,10 @@ namespace Chatapp_Egen
 
         private void receive_Click(object sender, EventArgs e)
         {
-            IPEndPoint klientEndPoint = new IPEndPoint(IPAddress.Any, 0);
+            IPEndPoint clientEndPoint = new IPEndPoint(IPAddress.Any, 0);
             UdpClient client = new UdpClient(12345);
-            byte[] inström = client.Receive(ref klientEndPoint);
-            messageTextBox.Text = Encoding.Unicode.GetString(inström);
+            byte[] instream = client.Receive(ref clientEndPoint);
+            messageTextBox.Text = Encoding.Unicode.GetString(instream);
         }
     }
 }
