@@ -28,29 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.serverIP = new System.Windows.Forms.RichTextBox();
+            this.serverPort = new System.Windows.Forms.RichTextBox();
             this.messageTextBox = new System.Windows.Forms.RichTextBox();
             this.send = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // serverIP
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(282, 31);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(192, 51);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.serverIP.Location = new System.Drawing.Point(282, 31);
+            this.serverIP.Name = "serverIP";
+            this.serverIP.Size = new System.Drawing.Size(192, 51);
+            this.serverIP.TabIndex = 0;
+            this.serverIP.Text = "";
             // 
-            // richTextBox2
+            // serverPort
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(282, 103);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(192, 51);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
+            this.serverPort.Location = new System.Drawing.Point(282, 103);
+            this.serverPort.Name = "serverPort";
+            this.serverPort.Size = new System.Drawing.Size(192, 51);
+            this.serverPort.TabIndex = 1;
+            this.serverPort.Text = "";
             // 
             // messageTextBox
             // 
@@ -99,8 +99,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.send);
             this.Controls.Add(this.messageTextBox);
-            this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.serverPort);
+            this.Controls.Add(this.serverIP);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -110,8 +110,8 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox serverIP;
+        private System.Windows.Forms.RichTextBox serverPort;
         private System.Windows.Forms.RichTextBox messageTextBox;
         private System.Windows.Forms.Button send;
         private System.Windows.Forms.Label label1;

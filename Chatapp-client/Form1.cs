@@ -17,6 +17,7 @@ namespace Chatapp_client
 
         private void send_Click(object sender, EventArgs e)
         {
+            //
             byte[] message = Encoding.Unicode.GetBytes(messageTextBox.Text);
             IPAddress serverIP = IPAddress.Parse("127.0.0.1");
             IPEndPoint destination = new IPEndPoint(serverIP, 12345);

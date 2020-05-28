@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Chatapp_Egen
@@ -37,6 +40,7 @@ namespace Chatapp_Egen
 
         private void receive_Click(object sender, EventArgs e)
         {
+            //
             IPEndPoint clientEndPoint = new IPEndPoint(IPAddress.Any, 0);
             UdpClient client = new UdpClient(12345);
             byte[] instream = client.Receive(ref clientEndPoint);

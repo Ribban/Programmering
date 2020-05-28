@@ -31,7 +31,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.serverPort = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.chatBox = new System.Windows.Forms.RichTextBox();
             this.messageTextBox = new System.Windows.Forms.RichTextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
@@ -43,7 +42,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label2.Location = new System.Drawing.Point(39, 37);
+            this.label2.Location = new System.Drawing.Point(35, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(222, 29);
             this.label2.TabIndex = 1;
@@ -51,7 +50,7 @@
             // 
             // serverPort
             // 
-            this.serverPort.Location = new System.Drawing.Point(267, 25);
+            this.serverPort.Location = new System.Drawing.Point(267, 29);
             this.serverPort.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.serverPort.Name = "serverPort";
             this.serverPort.Size = new System.Drawing.Size(216, 53);
@@ -66,21 +65,12 @@
             this.label3.Size = new System.Drawing.Size(0, 20);
             this.label3.TabIndex = 6;
             // 
-            // chatBox
-            // 
-            this.chatBox.Location = new System.Drawing.Point(37, 84);
-            this.chatBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.chatBox.Name = "chatBox";
-            this.chatBox.Size = new System.Drawing.Size(446, 155);
-            this.chatBox.TabIndex = 11;
-            this.chatBox.Text = "";
-            // 
             // messageTextBox
             // 
-            this.messageTextBox.Location = new System.Drawing.Point(37, 247);
+            this.messageTextBox.Location = new System.Drawing.Point(40, 93);
             this.messageTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.messageTextBox.Name = "messageTextBox";
-            this.messageTextBox.Size = new System.Drawing.Size(253, 50);
+            this.messageTextBox.Size = new System.Drawing.Size(443, 146);
             this.messageTextBox.TabIndex = 12;
             this.messageTextBox.Text = "";
             // 
@@ -94,10 +84,10 @@
             // 
             // receive
             // 
-            this.receive.Location = new System.Drawing.Point(303, 247);
+            this.receive.Location = new System.Drawing.Point(40, 247);
             this.receive.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.receive.Name = "receive";
-            this.receive.Size = new System.Drawing.Size(181, 51);
+            this.receive.Size = new System.Drawing.Size(443, 51);
             this.receive.TabIndex = 14;
             this.receive.Text = "Receive";
             this.receive.UseVisualStyleBackColor = true;
@@ -115,10 +105,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(594, 450);
+            this.ClientSize = new System.Drawing.Size(550, 356);
             this.Controls.Add(this.receive);
             this.Controls.Add(this.messageTextBox);
-            this.Controls.Add(this.chatBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.serverPort);
@@ -135,7 +124,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox serverPort;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RichTextBox chatBox;
         private System.Windows.Forms.RichTextBox messageTextBox;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
